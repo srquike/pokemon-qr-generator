@@ -1,0 +1,61 @@
+﻿@model IReadOnlyList<PokemonViewModel>
+
+@{
+    ViewData["Title"] = "Pokemons";
+    var correlative = 0;
+}
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Height</th>
+                <th scope="col">Order</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pokemon in Model)
+            {
+                <tr>
+                    <th scope="row">@(++correlative)</th>
+                    <td>@pokemon.Id</td>
+                    <td>@pokemon.Name</td>
+                    <td>@pokemon.Height</td>
+                    <td>@pokemon.Order</td>
+                    <td>@pokemon.Weight</td>
+                    <td>
+                        <button id="moreInfoButton" type="button" class="btn btn-primary"
+                            onclick="OpenMoreInfoModal('@pokemon.Name')">More</button>
+                        <button id="deleteButton" type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- More Info Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="qrCodeContainer">
+                    <img src="" id="qrImage" alt="QR Code for the Pokemon" width="300">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
